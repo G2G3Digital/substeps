@@ -31,6 +31,7 @@ Key Benefits
    getting_started*
    extending*
    related*
+   roadmap*
       
 
 .. Note::
