@@ -1,0 +1,6 @@
+_build/
+docs/
+.project
+_sources/
+_static
+*~
