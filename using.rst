@@ -65,8 +65,6 @@ A complex example
 A more elaborate example is illustrated below, again with a web application under test.  
 Additional step definition libraries and custom implementations can be used alongside to provide extra functionality.
 
-# format with line numbers
-
 .. raw:: html 
    
    <div class="admonition">
@@ -157,12 +155,7 @@ Additional step definition libraries and custom implementations can be used alon
          // execute SQL
          ...
 
-Todo - Some explanatory notes about the above..
-
-WIP
-      
-# background steps are defined once per feature and get executed before for each scenario or iteration of a scenario outline  
-
-Extend the example to include examples of
-   - substep defs calling each other
-   
+TODO
+- Some explanatory notes on the above (format with line numbers)
+- background steps are defined once per feature and get executed before for each scenario or iteration of a scenario outline
+- substep defs calling each other   

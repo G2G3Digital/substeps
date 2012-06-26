@@ -5,7 +5,7 @@ Substeps is not particularly difficult to set up manually, however the quickest 
 
 Sample project
 --------------
-Some details to go here
+A sample project can be downloaded <here todo> which contains all of the required configuration and some sample code to get you started. 
 
 
 Manual Setup
