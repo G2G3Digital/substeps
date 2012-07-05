@@ -5,7 +5,7 @@ Substeps is not particularly difficult to set up manually, however the quickest 
 
 Sample project
 --------------
-The sample project can be downloaded from `here <#>`_ which contains all of the required configuration and some sample code to get you started. 
+The sample project can be downloaded from `here <https://github.com/downloads/technophobia/substeps/example-substeps-project-0.0.1.zip>`_ which contains all of the required configuration and some sample code to get you started. 
 
 
 Manual Setup (Maven)
@@ -35,7 +35,7 @@ These instructions are for building a maven based project.
             <version>0.0.5</version>
         </dependency>
 
-    Check `Maven Central <#>`_ for the latest versions of these libraries.
+    Check `Maven Central <http://search.maven.org/#search|ga|1|com.technophobia.substeps>`_ for the latest versions of these libraries.
 
 3. Create a directory on the classpath to contain your feature files or sub-directories of feature files (eg ``src/test/resources/features``).
 4. Create a directory on the classpath to contain substep files (eg ``src/test/resources/substeps``).
