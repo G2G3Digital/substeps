@@ -25,7 +25,7 @@ These instructions are for building a maven based project.
             <version>0.0.3</version>
         </dependency>
     
-    The above dependency will also include substeps-core, however if you wish to create your own or use other step implemenations then include
+    The above dependency will also include substeps-core, however if you wish to create your own or use other step implementations then include
 
     .. code-block:: xml
     
@@ -193,20 +193,28 @@ These instructions are for building a maven based project.
         
                                     <executionConfigs>
         
-                                        <!-- One or more 'execution configurations', use multiple configs for different test initialisation, phases of project, etc -->
+                                        <!-- One or more 'execution configurations', use multiple configs for different 
+                                        test initialisation, phases of project, etc -->
         
                                         <executionConfig>
-                                            <description>Self Test Features</description> <!-- This appears at the root of the results report -->
-        
-                                            <tags>@all</tags>  <!-- optional - If the feature or scenario has this tag, then it will be 
+
+                                            <!-- This appears at the root of the results report -->
+                                            <description>Self Test Features</description> 
+                                                
+                                            <!-- optional - If the feature or scenario has this tag, then it will be 
                                                 included, otherwise it won't -->
-        
-                                            <fastFailParseErrors>false</fastFailParseErrors> <!-- optional - if true any parse errors will fail the build immediately, 
+                                            <tags>@all</tags>  
+
+                                            <!-- optional - if true any parse errors will fail the build immediately, 
                                                 rather than attempting to execute as much as possible and fail those tests 
                                                 that can't be parsed -->
-                                            <featureFile>${basedir}/target/test-classes/features</featureFile> <!-- path to the feature file, or directory containing the feature files -->
-                                            <subStepsFileName>${basedir}/target/test-classes/substeps</subStepsFileName> <!-- path to directory of substep files, or a single substep file -->
-        
+                                            <fastFailParseErrors>false</fastFailParseErrors> 
+
+                                            <!-- path to the feature file, or directory containing the feature files -->
+                                            <featureFile>${basedir}/target/test-classes/features</featureFile> 
+                                            
+                                            <!-- path to directory of substep files, or a single substep file -->
+                                            <subStepsFileName>${basedir}/target/test-classes/substeps</subStepsFileName> 
         
                                             <!-- List of classes containing step implementations -->
                                             <stepImplementationClassNames>
