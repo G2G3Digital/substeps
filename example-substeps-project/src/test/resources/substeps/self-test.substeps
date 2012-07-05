@@ -1,0 +1,88 @@
+# Substeps file for the webdriver-substeps self test.
+
+Define: Given I go to the self test page
+	NavigateTo /self-test.html
+
+Define: Then I can see '<page_title>'
+    AssertPageTitle is "<page_title>" 	
+	
+Define: And the header title is '<msg>' 
+	AssertValue id header-id text = "<msg>"
+	
+Define: And if I click the '<btn_text>' button
+    ClickSubmitButton "<btn_text>"
+    
+Define: Then I can see "<msg>" message  
+		AssertValue id show-text-on-button-click-text-div-id text = "<msg>"
+		
+Define: And I see "<option_value>" in select id <select_id>
+    AssertSelect id="<select_id>" text="<option_value>" is currently selected
+    
+Define: And I dont see "<option_value>" in select id <select_id>
+    AssertSelect id="<select_id>" text="<option_value>" is not currently selected
+    
+Define: Then I choose "<option_value>" in select id <select_id>      
+    ChooseOption "<option_value>" in id <select_id> 	
+    
+Define: And if I click the Click by id button
+	ClickById click-id
+	
+Define: Then I can see another "<msg>" message
+    AssertValue id show-text-on-id-click-text-div-id text = "<msg>"
+    
+Define: Then I see "<msg>" after a pause
+    FindByIdTimeout show-text-on-deplayed-id-click-text-div-id timeout = 10 secs
+
+Define: Given I enter "<txt>" into the text field
+	FindByTagAndAttributes tag="input" attributes=[name="named_text_field",maxlength="10",size="10"]
+	ClearAndSendKeys "<txt>"
+
+Define: Then the text field will contain "<txt>"	
+    FindByName "named_text_field"
+    AssertCurrentElement attribute="value" value="<txt>"
+
+Define: Given I enter "<txt>" another way into the text field
+	ClearAndSendKeys <txt> to id text-id
+ 	FindByXpath "id('text-id')"
+    AssertCurrentElement attribute="value" value="<txt>"
+
+Define: Given radio button with text "<rb_text>" is checked
+	FindRadioButton inside tag="label" with label="<rb_text>"
+	AssertRadioButton checked=true
+
+Define: Then radio button with text "<rb_text>" is checked
+	Given radio button with text "<rb_text>" is checked
+	
+Define: Given radio button with text "<rb_text>" is not checked
+	FindRadioButton inside tag="label" with label="<rb_text>"
+	AssertRadioButton checked=false
+	
+Define: Then I can check radio button with text "<rb_text>"	
+	FindRadioButton inside tag="label" with label="<rb_text>"
+	SetRadioButton checked=true	
+
+
+Define: Given checkbox with text "<cb_text>" is not checked
+	FindCheckbox inside tag="label" with label="<cb_text>"
+	AssertCheckBox checked=false
+
+Define: Then I can check checkbox with text "<cb_text>"
+	SetCheckedBox checked=true
+
+Define: And checkbox with text "<cb_text>" is checked
+	FindCheckbox inside tag="label" with label="<cb_text>"
+	AssertCheckBox checked=true
+   
+Define: And the field located beneath the heading has the text '<txt>'
+	FindById parent_div_id
+	FindChild ByTagAndAttributes tag="span" attributes=[class="some_class"]
+	AssertCurrentElement text="<txt>"	 
+   
+Define: And I can click the link "<link_text>" and see "<txt>"
+	ClickLink "<link_text>"
+	FindById show-text-on-link-click-text-div-id
+	AssertCurrentElement text="<txt>"   
+	
+Define: And the table row <row>, column <col> contains "<txt>"
+	FindById table_id
+	AssertTableValue column <col>, row <row> contains text "<txt>"	
