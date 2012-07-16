@@ -2,4 +2,5 @@ _build/
 docs/
 .project
 _sources/
+example-substeps-project/
 *~
