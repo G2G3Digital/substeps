@@ -1,3 +1,8 @@
 *~
 .project
 _build/
+.classpath
+.settings/
+target/
+*.log
+*.log.*

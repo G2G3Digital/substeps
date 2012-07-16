@@ -15,6 +15,7 @@ Key Benefits
 - Enables features and scenarios to be written using high level, business oriented language.
 - Enables non-technical users to extend the test vocabulary to suit the needs of the specific project.
 - Allows the creation of bespoke DSLs with associated functionality.
+- Supports the creation of nested step definitions. 
 - Easy to extend functionality for new domains or customise for a specific project.
 - Ability to provide enhanced reporting around passing acceptance tests and demonstrable requirements tracking.
 - Integration with standard development tools (Maven, Jenkins, Sonar*  etc).
@@ -31,7 +32,7 @@ Key Benefits
    getting_started*
    extending*
    related*
-   roadmap*
+   involved*
       
 
 .. Note::
