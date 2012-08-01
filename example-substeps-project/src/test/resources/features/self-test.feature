@@ -36,4 +36,4 @@ Scenario: a scenario
 	# table
 	And the table row 1, column 2 contains "Mrs Evil Headtecher"   	
 
-	
+	And find by child works

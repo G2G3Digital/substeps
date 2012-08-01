@@ -30,7 +30,13 @@ function showId(elemId)
 	var elem = document.getElementById(elemId);
 	elem.style.visibility="visible";
 	return false;
-	
+}
+
+function hideId(elemId)
+{
+    var elem = document.getElementById(elemId);
+    elem.style.visibility="hidden";
+    return false;
 }
 
 function showDivDelayed()
@@ -73,6 +79,12 @@ function showDivDelayed()
 
 
 <div id="show-text-on-id-click-text-div-id" style="visibility:hidden">Wahoo Two</div>
+
+<div id="mcshane-bug-div-id" style="visibility:hidden">mcshane</div>
+
+<div id="mcshane-negative-bug-div-id" >mcshane negative test</div>
+
+
 </p>
 <p>
 
@@ -174,6 +186,60 @@ function showDivDelayed()
 </thead>
 </thead>
 </table>
+</div>
+
+
+
+<div>
+
+<div class="container">
+                                                        <div class="row">
+                                                            <div class="span12"></div>
+                                                            <div class="span8">
+                                                                <div class="mini-profile">
+                                                                    <div class="portlet-cta-buttons">
+                                                                        <div class="btn-group">
+                                                                            <a class="btn edit-button dialog-modal"
+                                                                                data-toggle="modal"
+                                                                                href="#" onclick='showId("mcshane-bug-div-id");'>Edit</a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <a href="#"> <img
+                                                                        src="/image/organization_logo?img_id=0&t=1342606991018"
+                                                                        class="thumbnail avatar" alt="Edit My Group 1">
+                                                                    </a>
+                                                                    <h2>
+                                                                        Edit My Group 1 <i class="badge badge-amber area-tag">Group</i>
+                                                                    </h2>
+                                                                    <p class="profile-secondary">
+                                                                        <strong>Talking about:</strong> <span
+                                                                            style="display: inline;"> <span
+                                                                            style="padding-right: 5px; color: #666">adding
+                                                                                another one, </span> <span
+                                                                            style="padding-right: 5px; color: #666">and
+                                                                                another, </span> <span
+                                                                            style="padding-right: 5px; color: #666">default,
+                                                                        </span> <span style="padding-right: 5px; color: #666">generic
+                                                                                things, </span> <span
+                                                                            style="padding-right: 5px; color: #666">new
+                                                                                topic </span>
+                                                                        </span>
+                                                                    </p>
+                                                                    <p class="profile-tertiary">Type : 1</p>
+                                                                </div>
+                                                            </div>
+                                                            <!-- another a with the same class, but that's not a child -->
+                                                             <div class="btn-group">
+                                                                   <a class="btn edit-button dialog-modal"
+                                                                       data-toggle="modal"
+                                                                       href="#" onclick='hideId("mcshane-negative-bug-div-id");'>Edit</a>
+                                                               </div>
+                                                            
+                                                            <div class="span4 hidden-overflow" id="global-cta">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
 </div>
 
 

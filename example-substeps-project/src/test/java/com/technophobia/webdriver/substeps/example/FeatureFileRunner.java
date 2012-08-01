@@ -29,6 +29,8 @@ import com.technophobia.webdriver.substeps.runner.DefaultExecutionSetupTearDown;
  * A class which can be run as a junit test inside an IDE.  Useful for writing debugging tests.  
  * Use the maven runner plugin for continuous integration as that provides better reporting.
  * 
+ * Tags can be space separated and a feature or scenario will need all of the specified tags in order to be included.
+ * 
  * @author imoore
  */
 @SubStepsConfiguration(featureFile = "./target/test-classes/features", 
