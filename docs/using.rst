@@ -69,6 +69,8 @@ Additional step definition libraries and custom implementations can be used alon
    
    <div class="admonition">
       <span style="color:Red;">Feature:</span> A more complex feature<br/><br/>
+      
+      <span style="color:#69BDCB;"># Background steps are defined once per feature and executed before each scenario</span><br/>
       <span style="color:Blue;">Background:</span> <br/>
        <div style="position:relative;left:5em">
       Given the new user doesn't exist <br/>
@@ -80,16 +82,19 @@ Additional step definition libraries and custom implementations can be used alon
       </div>
       <br/>
       
+      <span style="color:#69BDCB;"># Outline scenarios are executed repeatedly, once for each row of the Examples table following the scenario.</span><br/>
+      <span style="color:#69BDCB;"># Variables from the table are substituted.</span><br/>
       <span style="color:Blue;">Scenario Outline:</span> I can log in with different users<br/>
       <div style="position:relative;left:5em">
       Given I can log in as "&lt;username&gt;"<br/>
+      <span style="color:#69BDCB;position:relative;left:2em;"># at runtime, the username token will be replaced with a value from the table below</span><br/>
       Then I am greeted by my "&lt;name&gt;"<br/>
       And my role is displayed as "&lt;role_name&gt;"<br/>
       </div>
       <br/>
 
       <span style="color:Blue;">Examples:</span><br/>
-      <div style="position:relative;left:5em"><pre>
+      <div style="position:relative;left:5em; width:50%"><pre>
       |username |name       |role_name     |
       |admin    |Andy Admin |Administrator |
       |boss     |Sue Super  |Supervisor    |
@@ -103,6 +108,8 @@ Additional step definition libraries and custom implementations can be used alon
    <span style="color:#69BDCB;"># Substep definitions for a complex feature ....</span><br/>
 
    <span style="color:Blue;">Define:</span> Given I can log in as "&lt;user_name&gt;"<br/>
+   <span style="color:#69BDCB;position:relative;left:2em;"># This substep is passed a parameter which we can refer to by its name, &lt;user_name&gt; in this case</span><br/>
+   
       <div style="position:relative;left:5em">
       NavigateTo /index.html<br/>
       ClickLink "Login"<br/>
@@ -141,9 +148,11 @@ Additional step definition libraries and custom implementations can be used alon
       </div>
    </div>   
 
+Substep definitions can also call other substeps, not just step implementations.
 
+Implementing bespoke step implementations is straight forward too, see `here <http://technophobia.github.com/substeps/extending.html#step-implementations>`_ for more details
 
-   
+  
 .. code-block:: java
 
    @StepImplementations
@@ -155,7 +164,3 @@ Additional step definition libraries and custom implementations can be used alon
          // execute SQL
          ...
 
-TODO
-- Some explanatory notes on the above (format with line numbers)
-- background steps are defined once per feature and get executed before for each scenario or iteration of a scenario outline
-- substep defs calling each other   

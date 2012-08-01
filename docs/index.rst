@@ -6,7 +6,7 @@
 Welcome to Substeps!
 ====================
 
-- Substeps is an open-source Behaviour Driven Development (`BDD <http://en.wikipedia.org/wiki/Behavior_Driven_Development>`_) test framework created by `Technophobia <http://www.technophobia.com/>`_.
+- Substeps is an open-source* Behaviour Driven Development (`BDD <http://en.wikipedia.org/wiki/Behavior_Driven_Development>`_) test framework created by `Technophobia <http://www.technophobia.com/>`_.
 - Tests can be implemented **and executed** by team members with limited technical experience.
 
 Key Benefits
@@ -18,8 +18,8 @@ Key Benefits
 - Supports the creation of nested step definitions. 
 - Easy to extend functionality for new domains or customise for a specific project.
 - Ability to provide enhanced reporting around passing acceptance tests and demonstrable requirements tracking.
-- Integration with standard development tools (Maven, Jenkins, Sonar*  etc).
-- Ability to publish the DSL in use for a particular project*.
+- Integration with standard development tools (Maven, Jenkins, Sonar**  etc).
+- Ability to publish the DSL in use for a particular project**.
 - Eclipse plugin providing code formatting, navigation, content assist, syntax highlighting and execution capabilities*.
 
 
@@ -36,5 +36,7 @@ Key Benefits
       
 
 .. Note::
-   `*` Some features are currently in development and may not be available at the time of reading!
+   `*` Released under the `Lesser Gnu Public License(LGPL) <http://www.gnu.org/licenses/lgpl.html>`_
+
+   `**` Some features are currently in development and may not be available at the time of reading!
 

@@ -6,6 +6,7 @@ Issues & Getting Involved
    - `Substeps Core <https://github.com/technophobia/substeps-core>`_
    - `Webdriver Substeps <https://github.com/technophobia/substeps-webdriver>`_
    - `Maven runner <https://github.com/technophobia/substeps-runner>`_
+   - `Glossary Builder <https://github.com/technophobia/substeps-glossary>`_
 
 If you have any issues or problems using any of the substeps projects, please let us know by raising an `issue <https://github.com/technophobia/substeps/issues>`_ under the substeps project or the specific project if you know where the issue lies. 
 
