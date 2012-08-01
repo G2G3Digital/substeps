@@ -1,0 +1,348 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Getting started with Substeps &mdash; Substeps  documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="top" title="Substeps  documentation" href="index.html" />
+    <link rel="next" title="Extending and Customising Substeps" href="extending.html" />
+    <link rel="prev" title="Usage" href="using.html" /> 
+  </head>
+  <body>
+      <div class="header"><h1 class="heading"><a href="index.html">
+          <span>Substeps  documentation</span></a></h1>
+        <h2 class="heading"><span>Getting started with Substeps</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="using.html">Usage</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="extending.html">Extending and Customising Substeps</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="getting-started-with-substeps">
+<h1>Getting started with Substeps<a class="headerlink" href="#getting-started-with-substeps" title="Permalink to this headline">¶</a></h1>
+<p>Substeps is not particularly difficult to set up manually, however the quickest route to learning how to use Substeps is to download the sample maven project and then tailor that to your needs.  See below on things you will need to configure for your own projects.</p>
+<div class="section" id="sample-project">
+<h2>Sample project<a class="headerlink" href="#sample-project" title="Permalink to this headline">¶</a></h2>
+<p>The sample project can be downloaded from <a class="reference external" href="https://github.com/downloads/technophobia/substeps/example-substeps-project-0.0.1.zip">here</a> which contains all of the required configuration and some sample code to get you started.</p>
+</div>
+<div class="section" id="manual-setup-maven">
+<h2>Manual Setup (Maven)<a class="headerlink" href="#manual-setup-maven" title="Permalink to this headline">¶</a></h2>
+<p>These instructions are for building a maven based project.</p>
+<ol class="arabic">
+<li><p class="first">Create an &#8216;acceptance-test&#8217; project.</p>
+</li>
+<li><p class="first">Include the substeps dependencies</p>
+<blockquote>
+<div><p>If you wish to run acceptance tests against a web application using selenium webdriver:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>com.technophobia.substeps<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>webdriver-substeps<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>0.0.3<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</pre></div>
+</div>
+<p>The above dependency will also include substeps-core, however if you wish to create your own or use other step implementations then include</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>com.technophobia.substeps<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>substeps-core<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>0.0.5<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</pre></div>
+</div>
+<p>Check <a class="reference external" href="http://search.maven.org/#search|ga|1|com.technophobia.substeps">Maven Central</a> for the latest versions of these libraries.</p>
+</div></blockquote>
+</li>
+<li><p class="first">Create a directory on the classpath to contain your feature files or sub-directories of feature files (eg <tt class="docutils literal"><span class="pre">src/test/resources/features</span></tt>).</p>
+</li>
+<li><p class="first">Create a directory on the classpath to contain substep files (eg <tt class="docutils literal"><span class="pre">src/test/resources/substeps</span></tt>).</p>
+</li>
+<li><p class="first">Create a junit class to run the tests in ‘development’ mode:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="nd">@SubStepsConfiguration</span><span class="o">(</span><span class="n">featureFile</span> <span class="o">=</span> <span class="s">&quot;./target/test-classes/features&quot;</span><span class="o">,</span>
+                       <span class="n">subStepsFile</span> <span class="o">=</span> <span class="s">&quot;./target/test-classes/substeps&quot;</span><span class="o">,</span>
+                       <span class="n">stepImplementations</span> <span class="o">=</span> <span class="o">{</span><span class="n">BaseWebdriverSubStepImplementations</span><span class="o">.</span><span class="na">class</span> <span class="o">},</span>
+                        <span class="n">beforeAndAfterImplementations</span> <span class="o">={</span><span class="n">DefaultExecutionSetupTearDown</span><span class="o">.</span><span class="na">class</span><span class="o">})</span>
+<span class="nd">@RunWith</span><span class="o">(</span><span class="n">JunitFeatureRunner</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AcceptanceTestsRunner</span> <span class="o">{</span>
+    <span class="c1">// no op</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>If you have bespoke step implementations then add to the list of step implementations above,
+likewise if you have specific setup and tear down functionality add this to the
+<tt class="docutils literal"><span class="pre">beforeAndAfterImplementations</span></tt> parameter.
+Setup and tear down methods will need to have the appropriate annotation, eg <tt class="docutils literal"><span class="pre">&#64;BeforeAllFeatures</span></tt> etc
+to signify when in the lifecycle to call that method.
+See the javadoc for com.technophobia.substeps.runner.setupteardown.Annotations for more details.</p>
+<p>Additional properties can also be specified see &lt;junitFeatureRunner details&gt; for more details</p>
+</li>
+<li><p class="first">create a configuration file <tt class="docutils literal"><span class="pre">localhost.properties</span></tt> and place in the classpath (<tt class="docutils literal"><span class="pre">src/test/resources</span></tt>).
+This property file will contain all of the environment settings for substeps.
+Substep libraries might each include their own set of default properties,
+the values in this file will override the defaults.</p>
+</li>
+<li><p class="first">To run the tests:
+Simply run the class as a Junit test; in Eclipse select the ‘AcceptanceTestsRunner’ class, right click
+and select Run As, junit test.</p>
+</li>
+<li><p class="first">Continuous integration (using Maven)</p>
+<p>The substeps maven plugin can execute a number of configurations as part of an integration test.
+Each configuration can be tailored to use specific properties, sets of tests or alternate
+initialisation classes and or step implementations.  The plugin adds all the dependencies of the project
+to it&#8217;s own set of dependencies to avoid duplication in the pom.</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;plugin&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>com.technophobia.substeps<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>substeps-runner<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>0.0.4<span class="nt">&lt;/version&gt;</span>
+
+    <span class="nt">&lt;executions&gt;</span>
+        <span class="nt">&lt;execution&gt;</span>
+            <span class="nt">&lt;id&gt;</span>SubSteps Test<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;phase&gt;</span>integration-test<span class="nt">&lt;/phase&gt;</span>
+            <span class="nt">&lt;goals&gt;</span>
+                <span class="nt">&lt;goal&gt;</span>run-features<span class="nt">&lt;/goal&gt;</span>
+            <span class="nt">&lt;/goals&gt;</span>
+        <span class="nt">&lt;/execution&gt;</span>
+    <span class="nt">&lt;/executions&gt;</span>
+    <span class="nt">&lt;configuration&gt;</span>
+    ...
+</pre></div>
+</div>
+<p>See #Substeps Maven Plugin for full details of the parameters and options available.</p>
+</li>
+<li><p class="first">An Example pom</p>
+<p>This example pom is taken from the sample project, feel free to copy and adapt.</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+
+    <span class="c">&lt;!-- This is a sample pom configuration for building a suite of substep</span>
+<span class="c">        acceptance tests based on the webdriver step implementations --&gt;</span>
+
+    <span class="c">&lt;!-- Change these values to something appropriate for your organisation</span>
+<span class="c">        and project --&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>com.technophobia.substeps<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>webdriver-substeps-example<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>0.0.1-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+
+    <span class="nt">&lt;packaging&gt;</span>jar<span class="nt">&lt;/packaging&gt;</span>
+    <span class="nt">&lt;name&gt;</span>Webdriver Substeps Example<span class="nt">&lt;/name&gt;</span>
+    <span class="nt">&lt;description&gt;</span>An example webdriver substeps project<span class="nt">&lt;/description&gt;</span>
+
+    <span class="nt">&lt;licenses&gt;</span>
+        <span class="nt">&lt;license&gt;</span>
+            <span class="nt">&lt;name&gt;</span>LGPL 3.0 license<span class="nt">&lt;/name&gt;</span>
+            <span class="nt">&lt;url&gt;</span>http://www.opensource.org/licenses/lgpl-3.0.html<span class="nt">&lt;/url&gt;</span>
+            <span class="nt">&lt;distribution&gt;</span>manual<span class="nt">&lt;/distribution&gt;</span>
+        <span class="nt">&lt;/license&gt;</span>
+    <span class="nt">&lt;/licenses&gt;</span>
+
+
+    <span class="nt">&lt;properties&gt;</span>
+        <span class="nt">&lt;project.build.sourceEncoding&gt;</span>UTF-8<span class="nt">&lt;/project.build.sourceEncoding&gt;</span>
+        <span class="nt">&lt;project.reporting.outputEncoding&gt;</span>UTF-8<span class="nt">&lt;/project.reporting.outputEncoding&gt;</span>
+        <span class="nt">&lt;selenium.version&gt;</span>2.21.0<span class="nt">&lt;/selenium.version&gt;</span>
+        <span class="nt">&lt;hamcrest.version&gt;</span>1.3.RC2<span class="nt">&lt;/hamcrest.version&gt;</span>
+        <span class="nt">&lt;junit.version&gt;</span>4.10<span class="nt">&lt;/junit.version&gt;</span>
+
+        <span class="nt">&lt;substeps.runner.version&gt;</span>0.0.4<span class="nt">&lt;/substeps.runner.version&gt;</span>
+        <span class="nt">&lt;webdriver.substeps.version&gt;</span>0.0.3<span class="nt">&lt;/webdriver.substeps.version&gt;</span>
+
+    <span class="nt">&lt;/properties&gt;</span>
+
+    <span class="nt">&lt;dependencies&gt;</span>
+
+        <span class="c">&lt;!-- webdriver-substeps will also include substeps-core as a dependency --&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>com.technophobia.substeps<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>webdriver-substeps<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>${webdriver.substeps.version}<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.seleniumhq.selenium<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>selenium-java<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>${selenium.version}<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+
+    <span class="nt">&lt;/dependencies&gt;</span>
+
+    <span class="nt">&lt;profiles&gt;</span>
+
+        <span class="c">&lt;!-- In this example, the running of the acceptance tests is defined within</span>
+<span class="c">            a profile, during the integration-test phase of the maven build.</span>
+<span class="c">            See the substeps-runner documentation for more details. --&gt;</span>
+
+        <span class="nt">&lt;profile&gt;</span>
+            <span class="nt">&lt;id&gt;</span>acceptance-tests<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;activation&gt;</span>
+                <span class="nt">&lt;activeByDefault&gt;</span>true<span class="nt">&lt;/activeByDefault&gt;</span>
+            <span class="nt">&lt;/activation&gt;</span>
+            <span class="nt">&lt;build&gt;</span>
+                <span class="nt">&lt;plugins&gt;</span>
+                    <span class="nt">&lt;plugin&gt;</span>
+                        <span class="nt">&lt;groupId&gt;</span>com.technophobia.substeps<span class="nt">&lt;/groupId&gt;</span>
+                        <span class="nt">&lt;artifactId&gt;</span>substeps-runner<span class="nt">&lt;/artifactId&gt;</span>
+                        <span class="nt">&lt;version&gt;</span>${substeps.runner.version}<span class="nt">&lt;/version&gt;</span>
+
+                        <span class="nt">&lt;executions&gt;</span>
+                            <span class="nt">&lt;execution&gt;</span>
+                                <span class="nt">&lt;id&gt;</span>SubSteps Test<span class="nt">&lt;/id&gt;</span>
+                                <span class="nt">&lt;phase&gt;</span>integration-test<span class="nt">&lt;/phase&gt;</span>
+                                <span class="nt">&lt;goals&gt;</span>
+                                    <span class="nt">&lt;goal&gt;</span>run-features<span class="nt">&lt;/goal&gt;</span>
+                                <span class="nt">&lt;/goals&gt;</span>
+                            <span class="nt">&lt;/execution&gt;</span>
+                        <span class="nt">&lt;/executions&gt;</span>
+
+                        <span class="nt">&lt;configuration&gt;</span>
+
+                            <span class="nt">&lt;executionConfigs&gt;</span>
+
+                                <span class="c">&lt;!-- One or more &#39;execution configurations&#39;, use multiple configs for different</span>
+<span class="c">                                test initialisation, phases of project, etc --&gt;</span>
+
+                                <span class="nt">&lt;executionConfig&gt;</span>
+
+                                    <span class="c">&lt;!-- This appears at the root of the results report --&gt;</span>
+                                    <span class="nt">&lt;description&gt;</span>Self Test Features<span class="nt">&lt;/description&gt;</span>
+
+                                    <span class="c">&lt;!-- optional - If the feature or scenario has this tag, then it will be</span>
+<span class="c">                                        included, otherwise it won&#39;t --&gt;</span>
+                                    <span class="nt">&lt;tags&gt;</span>@all<span class="nt">&lt;/tags&gt;</span>
+
+                                    <span class="c">&lt;!-- optional - if true any parse errors will fail the build immediately,</span>
+<span class="c">                                        rather than attempting to execute as much as possible and fail those tests</span>
+<span class="c">                                        that can&#39;t be parsed --&gt;</span>
+                                    <span class="nt">&lt;fastFailParseErrors&gt;</span>false<span class="nt">&lt;/fastFailParseErrors&gt;</span>
+
+                                    <span class="c">&lt;!-- path to the feature file, or directory containing the feature files --&gt;</span>
+                                    <span class="nt">&lt;featureFile&gt;</span>${basedir}/target/test-classes/features<span class="nt">&lt;/featureFile&gt;</span>
+
+                                    <span class="c">&lt;!-- path to directory of substep files, or a single substep file --&gt;</span>
+                                    <span class="nt">&lt;subStepsFileName&gt;</span>${basedir}/target/test-classes/substeps<span class="nt">&lt;/subStepsFileName&gt;</span>
+
+                                    <span class="c">&lt;!-- List of classes containing step implementations --&gt;</span>
+                                    <span class="nt">&lt;stepImplementationClassNames&gt;</span>
+                                        <span class="nt">&lt;param&gt;</span>com.technophobia.webdriver.substeps.impl.BaseWebdriverSubStepImplementations<span class="nt">&lt;/param&gt;</span>
+                                        <span class="nt">&lt;param&gt;</span>com.technophobia.webdriver.substeps.example.ExampleCustomWebdriverStepImplementations<span class="nt">&lt;/param&gt;</span>
+                                    <span class="nt">&lt;/stepImplementationClassNames&gt;</span>
+
+                                    <span class="c">&lt;!-- Ordered list of classes containing setup and tear down methods --&gt;</span>
+                                    <span class="nt">&lt;initialisationClass&gt;</span>
+                                        <span class="nt">&lt;param&gt;</span>com.technophobia.webdriver.substeps.runner.DefaultExecutionSetupTearDown<span class="nt">&lt;/param&gt;</span>
+                                        <span class="nt">&lt;param&gt;</span>com.technophobia.webdriver.substeps.example.ExampleSetupAndTearDown<span class="nt">&lt;/param&gt;</span>
+                                    <span class="nt">&lt;/initialisationClass&gt;</span>
+                                <span class="nt">&lt;/executionConfig&gt;</span>
+                            <span class="nt">&lt;/executionConfigs&gt;</span>
+
+                            <span class="c">&lt;!-- Default HTML report builder --&gt;</span>
+                            <span class="nt">&lt;executionReportBuilder</span>
+                                <span class="na">implementation=</span><span class="s">&quot;com.technophobia.substeps.report.DefaultExecutionReportBuilder&quot;</span><span class="nt">&gt;</span>
+
+                                <span class="c">&lt;!-- The directory in which the test execution report will be written</span>
+<span class="c">                                    to --&gt;</span>
+                                <span class="nt">&lt;outputDirectory&gt;</span>${project.build.testOutputDirectory}<span class="nt">&lt;/outputDirectory&gt;</span>
+                            <span class="nt">&lt;/executionReportBuilder&gt;</span>
+
+                        <span class="nt">&lt;/configuration&gt;</span>
+                        <span class="nt">&lt;dependencies&gt;</span>
+
+                            <span class="c">&lt;!-- NB. The plugin uses all test dependencies defined in this project,</span>
+<span class="c">                                as it&#39;s own so there is no need to list separately. The exception is an slf4j</span>
+<span class="c">                                logging implementation, which is required before other dependencies have</span>
+<span class="c">                                been added. This logger is included as an example, it can be replaced with</span>
+<span class="c">                                another slf4j logger of your choice. --&gt;</span>
+
+                            <span class="nt">&lt;dependency&gt;</span>
+                                <span class="nt">&lt;groupId&gt;</span>org.slf4j<span class="nt">&lt;/groupId&gt;</span>
+                                <span class="nt">&lt;artifactId&gt;</span>slf4j-log4j12<span class="nt">&lt;/artifactId&gt;</span>
+                                <span class="nt">&lt;version&gt;</span>1.6.4<span class="nt">&lt;/version&gt;</span>
+                            <span class="nt">&lt;/dependency&gt;</span>
+
+                        <span class="nt">&lt;/dependencies&gt;</span>
+                    <span class="nt">&lt;/plugin&gt;</span>
+                <span class="nt">&lt;/plugins&gt;</span>
+            <span class="nt">&lt;/build&gt;</span>
+        <span class="nt">&lt;/profile&gt;</span>
+
+    <span class="nt">&lt;/profiles&gt;</span>
+
+    <span class="c">&lt;!-- this section may be unnecessary depending on your maven configuration --&gt;</span>
+    <span class="nt">&lt;build&gt;</span>
+        <span class="nt">&lt;finalName&gt;</span>${project.artifactId}<span class="nt">&lt;/finalName&gt;</span>
+        <span class="nt">&lt;plugins&gt;</span>
+
+            <span class="nt">&lt;plugin&gt;</span>
+                <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+                <span class="nt">&lt;artifactId&gt;</span>maven-compiler-plugin<span class="nt">&lt;/artifactId&gt;</span>
+                <span class="nt">&lt;configuration&gt;</span>
+                    <span class="nt">&lt;source&gt;</span>1.5<span class="nt">&lt;/source&gt;</span>
+                    <span class="nt">&lt;target&gt;</span>1.5<span class="nt">&lt;/target&gt;</span>
+                    <span class="nt">&lt;inherit&gt;</span>true<span class="nt">&lt;/inherit&gt;</span>
+                    <span class="nt">&lt;encoding&gt;</span>${project.build.sourceEncoding}<span class="nt">&lt;/encoding&gt;</span>
+                <span class="nt">&lt;/configuration&gt;</span>
+            <span class="nt">&lt;/plugin&gt;</span>
+        <span class="nt">&lt;/plugins&gt;</span>
+    <span class="nt">&lt;/build&gt;</span>
+
+<span class="nt">&lt;/project&gt;</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="using.html">Usage</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="extending.html">Extending and Customising Substeps</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Technophobia.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
