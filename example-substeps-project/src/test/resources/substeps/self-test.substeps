@@ -87,9 +87,3 @@ Define: And the table row <row>, column <col> contains "<txt>"
 	FindById table_id
 	AssertTableValue column <col>, row <row> contains text "<txt>"
 	
-Define: And find by child works
-        FindByTagAndAttributes tag="div" attributes=[class="mini-profile"]
-        FindChild ByTagAndAttributes tag="a" attributes=[class="btn edit-button dialog-modal"]	
-        Click
-        AssertValue id mcshane-bug-div-id text = "mcshane"
-        	AssertValue id mcshane-negative-bug-div-id text = "mcshane negative test"

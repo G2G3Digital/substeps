@@ -45,20 +45,14 @@ These instructions are for building a maven based project.
    
       @SubStepsConfiguration(featureFile = "./target/test-classes/features", 
                              subStepsFile = "./target/test-classes/substeps", 
-                             stepImplementations = {BaseWebdriverSubStepImplementations.class },
-                              beforeAndAfterImplementations ={DefaultExecutionSetupTearDown.class})
+                             stepImplementations = {BaseWebdriverSubStepImplementations.class })
       @RunWith(JunitFeatureRunner.class)
       public class AcceptanceTestsRunner {
           // no op
       }
 
-   If you have bespoke step implementations then add to the list of step implementations above, 
-   likewise if you have specific setup and tear down functionality add this to the 
-   ``beforeAndAfterImplementations`` parameter.  
-   Setup and tear down methods will need to have the appropriate annotation, eg ``@BeforeAllFeatures`` etc
-   to signify when in the lifecycle to call that method. 
-   See the javadoc for com.technophobia.substeps.runner.setupteardown.Annotations for more details.
-   
+   If you have bespoke step implementations then add to the list of step implementations above.  
+      
    Additional properties can also be specified see <junitFeatureRunner details> for more details
 
 6. create a configuration file ``localhost.properties`` and place in the classpath (``src/test/resources``).

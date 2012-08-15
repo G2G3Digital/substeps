@@ -23,22 +23,20 @@ import org.junit.runner.RunWith;
 import com.technophobia.substeps.runner.JunitFeatureRunner;
 import com.technophobia.substeps.runner.JunitFeatureRunner.SubStepsConfiguration;
 import com.technophobia.webdriver.substeps.impl.BaseWebdriverSubStepImplementations;
-import com.technophobia.webdriver.substeps.runner.DefaultExecutionSetupTearDown;
 
 /**
- * A class which can be run as a junit test inside an IDE.  Useful for writing debugging tests.  
- * Use the maven runner plugin for continuous integration as that provides better reporting.
+ * A class which can be run as a junit test inside an IDE. Useful for writing
+ * debugging tests. Use the maven runner plugin for continuous integration as
+ * that provides better reporting.
  * 
- * Tags can be space separated and a feature or scenario will need all of the specified tags in order to be included.
+ * Tags can be space separated and a feature or scenario will need all of the
+ * specified tags in order to be included.
  * 
  * @author imoore
  */
-@SubStepsConfiguration(featureFile = "./target/test-classes/features", 
-subStepsFile = "./target/test-classes/substeps", 
-stepImplementations = { BaseWebdriverSubStepImplementations.class, ExampleCustomWebdriverStepImplementations.class },
-beforeAndAfterImplementations = { DefaultExecutionSetupTearDown.class, ExampleSetupAndTearDown.class },
-tagList = "@all")
-
+@SubStepsConfiguration(featureFile = "./target/test-classes/features", subStepsFile = "./target/test-classes/substeps", stepImplementations = {
+        BaseWebdriverSubStepImplementations.class,
+        ExampleCustomWebdriverStepImplementations.class }, tagList = "@all")
 @RunWith(JunitFeatureRunner.class)
 public class FeatureFileRunner {
     // no op

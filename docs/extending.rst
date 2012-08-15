@@ -13,15 +13,26 @@ either as simple classes, or packaged inside a jar as a library.
 Step Implementations
 --------------------
 Custom step implementations can be implemented by annotating a class with ``@StepImplementations`` and 
-including the class in the run configurations described above.  
+including the class in the run configurations described above.
+
+If the step implementation class requires specific setup and tear down, use the ``requiredInitialisationClasses`` 
+attribute on the ``@StepImplementations`` annotation to list, in order, the initialisation classes.
+Setup and tear down methods will need to have the appropriate annotation, eg ``@BeforeAllFeatures`` etc
+to signify when in the lifecycle to call that method. 
+See the javadoc for com.technophobia.substeps.runner.setupteardown.Annotations for more details.
+
+  
 Each step implemenation method should be annotated with ``@Step("<expression>")`` where <expression> 
 is a java regular expression that is used to match on the strings from feature and substep files.
 Capture groups can be used to map to parameters eg:
 
 .. code-block:: java
+   
+   @StepImplementations (requiredInitialisationClasses=MySetupAndTearDown.class)
+   public MyStepImplementations {
 
-   @Step("DoSomething name=\"([^\"]*)\", value=\"([^\"]*)\"")
-   public void doSomething(final String name, final String value){
+      @Step("DoSomething name=\"([^\"]*)\", value=\"([^\"]*)\"")
+      public void doSomething(final String name, final String value){
       ...
 
 Parameters can be converted to other simple types using the @StepParameter annotation and 
