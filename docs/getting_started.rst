@@ -5,7 +5,7 @@ Substeps is not particularly difficult to set up manually, however the quickest 
 
 Sample project
 --------------
-The sample project can be downloaded from `here <https://github.com/downloads/technophobia/substeps/example-substeps-project-0.0.1.zip>`_ which contains all of the required configuration and some sample code to get you started. 
+The sample project can be downloaded from `here <https://github.com/downloads/technophobia/substeps/example-substeps-project-0.0.3.zip>`_ which contains all of the required configuration and some sample code to get you started. 
 
 
 Manual Setup (Maven)
@@ -22,7 +22,7 @@ These instructions are for building a maven based project.
         <dependency>
             <groupId>com.technophobia.substeps</groupId>
             <artifactId>webdriver-substeps</artifactId>
-            <version>0.0.3</version>
+            <version>0.0.5</version>
         </dependency>
     
     The above dependency will also include substeps-core, however if you wish to create your own or use other step implementations then include
@@ -32,7 +32,7 @@ These instructions are for building a maven based project.
         <dependency>
             <groupId>com.technophobia.substeps</groupId>
             <artifactId>substeps-core</artifactId>
-            <version>0.0.5</version>
+            <version>0.0.7</version>
         </dependency>
 
     Check `Maven Central <http://search.maven.org/#search|ga|1|com.technophobia.substeps>`_ for the latest versions of these libraries.
@@ -76,7 +76,7 @@ These instructions are for building a maven based project.
         <plugin>
             <groupId>com.technophobia.substeps</groupId>
             <artifactId>substeps-runner</artifactId>
-            <version>0.0.4</version>
+            <version>0.0.6</version>
     
             <executions>
                 <execution>
@@ -129,12 +129,12 @@ These instructions are for building a maven based project.
             <properties>
                 <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
                 <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-                <selenium.version>2.21.0</selenium.version>
+                <selenium.version>2.25.0</selenium.version>
                 <hamcrest.version>1.3.RC2</hamcrest.version>
                 <junit.version>4.10</junit.version>
         
-                <substeps.runner.version>0.0.4</substeps.runner.version>
-                <webdriver.substeps.version>0.0.3</webdriver.substeps.version>
+                <substeps.runner.version>0.0.6</substeps.runner.version>
+                <webdriver.substeps.version>0.0.5</webdriver.substeps.version>
         
             </properties>
         
@@ -216,11 +216,6 @@ These instructions are for building a maven based project.
                                                 <param>com.technophobia.webdriver.substeps.example.ExampleCustomWebdriverStepImplementations</param>
                                             </stepImplementationClassNames>
         
-                                            <!-- Ordered list of classes containing setup and tear down methods -->
-                                            <initialisationClass>
-                                                <param>com.technophobia.webdriver.substeps.runner.DefaultExecutionSetupTearDown</param>
-                                                <param>com.technophobia.webdriver.substeps.example.ExampleSetupAndTearDown</param>
-                                            </initialisationClass>
                                         </executionConfig>
                                     </executionConfigs>
         
