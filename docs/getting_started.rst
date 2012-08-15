@@ -8,6 +8,93 @@ Sample project
 The sample project can be downloaded from `here <https://github.com/downloads/technophobia/substeps/example-substeps-project-0.0.1.zip>`_ which contains all of the required configuration and some sample code to get you started. 
 
 
+Manual setup (Ant)
+------------------
+These instructionsa are for building an Ant-based project.
+
+1. Create a project structure of your choice
+2. Import the substeps namespace into the build.xml
+3. Define an Ant taskdef to allow usage of the custom Ant task
+4. Add a target to run your SubSteps configuration
+5. Create a directory on the classpath to contain your feature files or sub-directories of feature files (eg ``src/test/resources/features``).
+6. Create a directory on the classpath to contain substep files (eg ``src/test/resources/substeps``).
+7. Create a junit class to run the tests in ‘development’ mode:
+
+   .. code-block:: java
+   
+      @SubStepsConfiguration(featureFile = "./target/test-classes/features", 
+                             subStepsFile = "./target/test-classes/substeps", 
+                             stepImplementations = {BaseWebdriverSubStepImplementations.class })
+      @RunWith(JunitFeatureRunner.class)
+      public class AcceptanceTestsRunner {
+          // no op
+      }
+
+   If you have bespoke step implementations then add to the list of step implementations above.  
+      
+   Additional properties can also be specified see <junitFeatureRunner details> for more details
+
+8. create a configuration file ``localhost.properties`` and place in the classpath (``src/test/resources``).
+   This property file will contain all of the environment settings for substeps.  
+   Substep libraries might each include their own set of default properties, 
+   the values in this file will override the defaults.
+
+9. To run the tests:
+   Simply run the class as a Junit test; in Eclipse select the ‘AcceptanceTestsRunner’ class, right click 
+   and select Run As, junit test.
+
+10. An example build.xml
+
+   .. code-block:: xml
+
+
+	<project name="MyProject" default="run-substeps" basedir="." xmlns:substeps="antlib:com.technophobia.substeps">
+		<description>
+		Simple example build file to demonstrate using SubSteps with ANT
+		</description>
+
+		<property name="src" location="src/main/java" />
+		<property name="build" location="build" />
+
+		<path id="cp">
+			<pathelement location="${user.home}/.m2/repository/com/technophobia/substeps/substeps-core/0.0.8-SNAPSHOT/substeps-core-0.0.8-SNAPSHOT.jar" />
+			<pathelement location="${user.home}/.m2/repository/ch/qos/logback/logback-classic/1.0.6/logback-classic-1.0.6.jar" />
+			<pathelement location="${user.home}/.m2/repository/ch/qos/logback/logback-core/1.0.6/logback-core-1.0.6.jar" />
+			<pathelement location="${build}" />
+		</path>
+
+		<target name="clean">
+			<delete dir="${build}"/>
+		</target>
+
+		<target name="compile" depends="init">
+			<javac srcdir="${src}" destdir="${build}" classpathref="cp" />
+		</target>
+
+		<target name="init">
+			<mkdir dir="${build}"/>
+		</target>
+
+		<target name="run-substeps" depends="compile">
+		    <taskdef uri="antlib:com.technophobia.substeps"
+		        resource="substeps.xml"
+		        classpathref="cp" />
+
+		        <substeps:substeps>
+		                <substeps:executionConfig featureFile="${basedir}/features" subStepsFileName="${basedir}/substeps">
+		                        <substeps:stepImplementationClassNames>
+		                                <substeps:param>com.technophobia.example.Steps</substeps:param>
+		                        </substeps:stepImplementationClassNames>
+
+		                        <substeps:initialisationClass>
+		                                <substeps:param>com.technophobia.example.Init</substeps:param>
+		                        </substeps:initialisationClass>
+		                </substeps:executionConfig>
+		        </substeps:substeps>
+		</target>
+	</project>
+
+
 Manual Setup (Maven)
 --------------------
 These instructions are for building a maven based project.
