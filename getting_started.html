@@ -57,6 +57,97 @@
 <h2>Sample project<a class="headerlink" href="#sample-project" title="Permalink to this headline">¶</a></h2>
 <p>The sample project can be downloaded from <a class="reference external" href="https://github.com/downloads/technophobia/substeps/example-substeps-project-0.0.3.zip">here</a> which contains all of the required configuration and some sample code to get you started.</p>
 </div>
+<div class="section" id="manual-setup-ant">
+<h2>Manual setup (Ant)<a class="headerlink" href="#manual-setup-ant" title="Permalink to this headline">¶</a></h2>
+<p>These instructionsa are for building an Ant-based project.</p>
+<ol class="arabic">
+<li><p class="first">Create a project structure of your choice</p>
+</li>
+<li><p class="first">Import the substeps namespace into the build.xml</p>
+</li>
+<li><p class="first">Define an Ant taskdef to allow usage of the custom Ant task</p>
+</li>
+<li><p class="first">Add a target to run your SubSteps configuration</p>
+</li>
+<li><p class="first">Create a directory on the classpath to contain your feature files or sub-directories of feature files (eg <tt class="docutils literal"><span class="pre">src/test/resources/features</span></tt>).</p>
+</li>
+<li><p class="first">Create a directory on the classpath to contain substep files (eg <tt class="docutils literal"><span class="pre">src/test/resources/substeps</span></tt>).</p>
+</li>
+<li><p class="first">Create a junit class to run the tests in ‘development’ mode:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="nd">@SubStepsConfiguration</span><span class="o">(</span><span class="n">featureFile</span> <span class="o">=</span> <span class="s">&quot;./target/test-classes/features&quot;</span><span class="o">,</span>
+                       <span class="n">subStepsFile</span> <span class="o">=</span> <span class="s">&quot;./target/test-classes/substeps&quot;</span><span class="o">,</span>
+                       <span class="n">stepImplementations</span> <span class="o">=</span> <span class="o">{</span><span class="n">BaseWebdriverSubStepImplementations</span><span class="o">.</span><span class="na">class</span> <span class="o">})</span>
+<span class="nd">@RunWith</span><span class="o">(</span><span class="n">JunitFeatureRunner</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AcceptanceTestsRunner</span> <span class="o">{</span>
+    <span class="c1">// no op</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>If you have bespoke step implementations then add to the list of step implementations above.</p>
+<p>Additional properties can also be specified see &lt;junitFeatureRunner details&gt; for more details</p>
+</li>
+<li><p class="first">create a configuration file <tt class="docutils literal"><span class="pre">localhost.properties</span></tt> and place in the classpath (<tt class="docutils literal"><span class="pre">src/test/resources</span></tt>).
+This property file will contain all of the environment settings for substeps.
+Substep libraries might each include their own set of default properties,
+the values in this file will override the defaults.</p>
+</li>
+<li><p class="first">To run the tests:
+Simply run the class as a Junit test; in Eclipse select the ‘AcceptanceTestsRunner’ class, right click
+and select Run As, junit test.</p>
+</li>
+<li><p class="first">An example build.xml</p>
+</li>
+</ol>
+<blockquote>
+<div><div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">&quot;MyProject&quot;</span> <span class="na">default=</span><span class="s">&quot;run-substeps&quot;</span> <span class="na">basedir=</span><span class="s">&quot;.&quot;</span> <span class="na">xmlns:substeps=</span><span class="s">&quot;antlib:com.technophobia.substeps&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;description&gt;</span>
+        Simple example build file to demonstrate using SubSteps with ANT
+        <span class="nt">&lt;/description&gt;</span>
+
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;src&quot;</span> <span class="na">location=</span><span class="s">&quot;src/main/java&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;build&quot;</span> <span class="na">location=</span><span class="s">&quot;build&quot;</span> <span class="nt">/&gt;</span>
+
+        <span class="nt">&lt;path</span> <span class="na">id=</span><span class="s">&quot;cp&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;pathelement</span> <span class="na">location=</span><span class="s">&quot;${user.home}/.m2/repository/com/technophobia/substeps/substeps-core/0.0.8-SNAPSHOT/substeps-core-0.0.8-SNAPSHOT.jar&quot;</span> <span class="nt">/&gt;</span>
+                <span class="nt">&lt;pathelement</span> <span class="na">location=</span><span class="s">&quot;${user.home}/.m2/repository/ch/qos/logback/logback-classic/1.0.6/logback-classic-1.0.6.jar&quot;</span> <span class="nt">/&gt;</span>
+                <span class="nt">&lt;pathelement</span> <span class="na">location=</span><span class="s">&quot;${user.home}/.m2/repository/ch/qos/logback/logback-core/1.0.6/logback-core-1.0.6.jar&quot;</span> <span class="nt">/&gt;</span>
+                <span class="nt">&lt;pathelement</span> <span class="na">location=</span><span class="s">&quot;${build}&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/path&gt;</span>
+
+        <span class="nt">&lt;target</span> <span class="na">name=</span><span class="s">&quot;clean&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;delete</span> <span class="na">dir=</span><span class="s">&quot;${build}&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/target&gt;</span>
+
+        <span class="nt">&lt;target</span> <span class="na">name=</span><span class="s">&quot;compile&quot;</span> <span class="na">depends=</span><span class="s">&quot;init&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;javac</span> <span class="na">srcdir=</span><span class="s">&quot;${src}&quot;</span> <span class="na">destdir=</span><span class="s">&quot;${build}&quot;</span> <span class="na">classpathref=</span><span class="s">&quot;cp&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/target&gt;</span>
+
+        <span class="nt">&lt;target</span> <span class="na">name=</span><span class="s">&quot;init&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;mkdir</span> <span class="na">dir=</span><span class="s">&quot;${build}&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/target&gt;</span>
+
+        <span class="nt">&lt;target</span> <span class="na">name=</span><span class="s">&quot;run-substeps&quot;</span> <span class="na">depends=</span><span class="s">&quot;compile&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;taskdef</span> <span class="na">uri=</span><span class="s">&quot;antlib:com.technophobia.substeps&quot;</span>
+                <span class="na">resource=</span><span class="s">&quot;substeps.xml&quot;</span>
+                <span class="na">classpathref=</span><span class="s">&quot;cp&quot;</span> <span class="nt">/&gt;</span>
+
+                <span class="nt">&lt;substeps:substeps&gt;</span>
+                        <span class="nt">&lt;substeps:executionConfig</span> <span class="na">featureFile=</span><span class="s">&quot;${basedir}/features&quot;</span> <span class="na">subStepsFileName=</span><span class="s">&quot;${basedir}/substeps&quot;</span><span class="nt">&gt;</span>
+                                <span class="nt">&lt;substeps:stepImplementationClassNames&gt;</span>
+                                        <span class="nt">&lt;substeps:param&gt;</span>com.technophobia.example.Steps<span class="nt">&lt;/substeps:param&gt;</span>
+                                <span class="nt">&lt;/substeps:stepImplementationClassNames&gt;</span>
+
+                                <span class="nt">&lt;substeps:initialisationClass&gt;</span>
+                                        <span class="nt">&lt;substeps:param&gt;</span>com.technophobia.example.Init<span class="nt">&lt;/substeps:param&gt;</span>
+                                <span class="nt">&lt;/substeps:initialisationClass&gt;</span>
+                        <span class="nt">&lt;/substeps:executionConfig&gt;</span>
+                <span class="nt">&lt;/substeps:substeps&gt;</span>
+        <span class="nt">&lt;/target&gt;</span>
+<span class="nt">&lt;/project&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
 <div class="section" id="manual-setup-maven">
 <h2>Manual Setup (Maven)<a class="headerlink" href="#manual-setup-maven" title="Permalink to this headline">¶</a></h2>
 <p>These instructions are for building a maven based project.</p>
