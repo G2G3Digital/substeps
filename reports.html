@@ -1,0 +1,110 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Substep Test Exceution Report &mdash; Substeps  documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="top" title="Substeps  documentation" href="index.html" />
+    <link rel="next" title="Related Projects" href="related_projects.html" />
+    <link rel="prev" title="Extending and Customising Substeps" href="extending.html" /> 
+  </head>
+  <body>
+      <div class="header"><h1 class="heading"><a href="index.html">
+          <span>Substeps  documentation</span></a></h1>
+        <h2 class="heading"><span>Substep Test Exceution Report</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="extending.html">Extending and Customising Substeps</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="related_projects.html">Related Projects</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="substep-test-exceution-report">
+<h1>Substep Test Exceution Report<a class="headerlink" href="#substep-test-exceution-report" title="Permalink to this headline">¶</a></h1>
+<p>A default test execution report builder is included with Substeps and can be enabled with the following
+fragment in the pom.xml:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;plugin&gt;</span>
+   <span class="nt">&lt;groupId&gt;</span>com.technophobia.substeps<span class="nt">&lt;/groupId&gt;</span>
+   <span class="nt">&lt;artifactId&gt;</span>substeps-runner<span class="nt">&lt;/artifactId&gt;</span>
+
+   <span class="nt">&lt;configuration&gt;</span>
+   ...
+       <span class="c">&lt;!-- Default HTML report builder --&gt;</span>
+       <span class="nt">&lt;executionReportBuilder</span>
+           <span class="na">implementation=</span><span class="s">&quot;com.technophobia.substeps.report.DefaultExecutionReportBuilder&quot;</span><span class="nt">&gt;</span>
+
+           <span class="c">&lt;!-- The directory in which the test execution report will be written to --&gt;</span>
+           <span class="nt">&lt;outputDirectory&gt;</span>${project.build.testOutputDirectory}<span class="nt">&lt;/outputDirectory&gt;</span>
+
+           <span class="c">&lt;!-- report title is used in the HTML test report --&gt;</span>
+           <span class="nt">&lt;reportTitle&gt;</span>Substeps Report - ${project.version}<span class="nt">&lt;/reportTitle&gt;</span>
+
+       <span class="nt">&lt;/executionReportBuilder&gt;</span>
+
+   <span class="nt">&lt;/configuration&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If this configuration is omitted, no report will be produced.</p>
+</div>
+<div class="section" id="example-report">
+<h2>Example Report<a class="headerlink" href="#example-report" title="Permalink to this headline">¶</a></h2>
+<p>An example of the report can be found <a class="reference external" href="_static/example_substeps_report/report_frame.html">here</a></p>
+<p>The example uses the output from running the tests contained within the
+example susbteps project.  Javascript is required, however the report does not need to be served from
+a webserver, it will work standalone.</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="extending.html">Extending and Customising Substeps</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="related_projects.html">Related Projects</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Technophobia.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
