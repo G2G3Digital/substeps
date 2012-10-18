@@ -33,7 +33,7 @@ fragment in the pom.xml:
 Example Report
 --------------
 
-An example of the report can be found `here <_static/example_substeps_report/report_frame.html>`_
+An example of the report can be found `here <example_substeps_report/report_frame.html>`_
 
 The example uses the output from running the tests contained within the 
 example susbteps project.  Javascript is required, however the report does not need to be served from
