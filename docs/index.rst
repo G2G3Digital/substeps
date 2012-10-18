@@ -31,6 +31,7 @@ Key Benefits
    using*
    getting_started*
    extending*
+   reports*
    related*
    involved*
       

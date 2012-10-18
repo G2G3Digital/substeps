@@ -57,7 +57,7 @@ These instructionsa are for building an Ant-based project.
 		<property name="build" location="build" />
 
 		<path id="cp">
-			<pathelement location="${user.home}/.m2/repository/com/technophobia/substeps/substeps-core/0.0.8-SNAPSHOT/substeps-core-0.0.8-SNAPSHOT.jar" />
+			<pathelement location="${user.home}/.m2/repository/com/technophobia/substeps/substeps-core/1.0.1/substeps-core-1.0.1.jar" />
 			<pathelement location="${user.home}/.m2/repository/ch/qos/logback/logback-classic/1.0.6/logback-classic-1.0.6.jar" />
 			<pathelement location="${user.home}/.m2/repository/ch/qos/logback/logback-core/1.0.6/logback-core-1.0.6.jar" />
 			<pathelement location="${build}" />
@@ -109,7 +109,7 @@ These instructions are for building a maven based project.
         <dependency>
             <groupId>com.technophobia.substeps</groupId>
             <artifactId>webdriver-substeps</artifactId>
-            <version>0.0.5</version>
+            <version>1.0.1</version>
         </dependency>
     
     The above dependency will also include substeps-core, however if you wish to create your own or use other step implementations then include
@@ -119,7 +119,7 @@ These instructions are for building a maven based project.
         <dependency>
             <groupId>com.technophobia.substeps</groupId>
             <artifactId>substeps-core</artifactId>
-            <version>0.0.7</version>
+            <version>1.0.1</version>
         </dependency>
 
     Check `Maven Central <http://search.maven.org/#search|ga|1|com.technophobia.substeps>`_ for the latest versions of these libraries.
@@ -163,7 +163,7 @@ These instructions are for building a maven based project.
         <plugin>
             <groupId>com.technophobia.substeps</groupId>
             <artifactId>substeps-runner</artifactId>
-            <version>0.0.6</version>
+            <version>1.0.1</version>
     
             <executions>
                 <execution>
@@ -198,7 +198,7 @@ These instructions are for building a maven based project.
                 and project -->
             <groupId>com.technophobia.substeps</groupId>
             <artifactId>webdriver-substeps-example</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>1.0.1-SNAPSHOT</version>
         
             <packaging>jar</packaging>
             <name>Webdriver Substeps Example</name>
@@ -220,8 +220,8 @@ These instructions are for building a maven based project.
                 <hamcrest.version>1.3.RC2</hamcrest.version>
                 <junit.version>4.10</junit.version>
         
-                <substeps.runner.version>0.0.6</substeps.runner.version>
-                <webdriver.substeps.version>0.0.5</webdriver.substeps.version>
+                <substeps.runner.version>1.0.1</substeps.runner.version>
+                <webdriver.substeps.version>1.0.1</webdriver.substeps.version>
         
             </properties>
         
