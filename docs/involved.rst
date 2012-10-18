@@ -10,6 +10,8 @@ Issues & Getting Involved
 
 If you have any issues or problems using any of the substeps projects, please let us know by raising an `issue <https://github.com/technophobia/substeps/issues>`_ under the substeps project or the specific project if you know where the issue lies. 
 
+There is a `Substeps Google group <http://groups.google.com/group/substeps?hl=en-GB>`_ where new releases will be announced and you will be able to receive support and answers to any questions you may have.  You can post to the group vai email: substeps@googlegroups.com.
+
 We'd love to hear about any feedback, feature requests and of course, this being an open source project on github, pull requests!
 
 The Future
