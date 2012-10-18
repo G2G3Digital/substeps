@@ -1,9 +1,13 @@
 #! /bin/bash
 
-# buyild the latest set of docs
+# build the latest set of docs
+
 cd docs
 make html
 cd ..
+
+# move the example feature report into place
+cp -R example_substeps_report docs/_build/html/_static
 
 # checkout gh-pages
 git checkout gh-pages

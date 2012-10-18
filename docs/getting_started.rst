@@ -5,7 +5,7 @@ Substeps is not particularly difficult to set up manually, however the quickest 
 
 Sample project
 --------------
-The sample project can be downloaded from `here <https://github.com/downloads/technophobia/substeps/example-substeps-project-0.0.3.zip>`_ which contains all of the required configuration and some sample code to get you started. 
+The sample project can be downloaded from `here <https://github.com/downloads/technophobia/substeps/example-substeps-project-1.0.1.zip>`_ which contains all of the required configuration and some sample code to get you started. 
 
 
 Manual setup (Ant)
@@ -310,9 +310,12 @@ These instructions are for building a maven based project.
                                     <executionReportBuilder
                                         implementation="com.technophobia.substeps.report.DefaultExecutionReportBuilder">
         
-                                        <!-- The directory in which the test execution report will be written 
-                                            to -->
+                                        <!-- The directory in which the test execution report will be written to -->
                                         <outputDirectory>${project.build.testOutputDirectory}</outputDirectory>
+                                        
+                                        <!-- report title is used in the HTML test report -->
+                                        <reportTitle>Substeps Report - ${project.version}</reportTitle>
+                                        
                                     </executionReportBuilder>
         
                                 </configuration>
