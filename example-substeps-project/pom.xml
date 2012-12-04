@@ -183,8 +183,7 @@
 
 								<configuration>
 									<outputDirectory>${project.build.directory}/ant-dependencies-substeps</outputDirectory>
-<!-- 									<includeArtifactIds>substeps-ant-runner,substeps-junit-runner,substeps-runner-common,webdriver-substeps,substeps-core,substeps-core-api</includeArtifactIds> -->
-									<includeGroupIds>com.technophobia.substeps</includeGroupIds>
+									<includeArtifactIds>substeps-ant-runner,substeps-junit-runner,substeps-runner-common,webdriver-substeps,substeps-core,substeps-core-api</includeArtifactIds>
 								</configuration>
 
 							</execution>
