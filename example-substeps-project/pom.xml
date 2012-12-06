@@ -10,7 +10,7 @@
 		and project -->
 	<groupId>com.technophobia.substeps</groupId>
 	<artifactId>webdriver-substeps-example</artifactId>
-	<version>1.0.2-SNAPSHOT</version>
+	<version>1.1.0-SNAPSHOT</version>
 
 	<packaging>jar</packaging>
 	<name>Webdriver Substeps Example</name>
@@ -31,15 +31,17 @@
 		<hamcrest.version>1.3.RC2</hamcrest.version>
 		<junit.version>4.10</junit.version>
 		<forked>true</forked>
+                <substeps.bom.version>1.1.0-SNAPSHOT</substeps.bom.version>
+                <substeps.webdriver.version>1.1.0-SNAPSHOT</substeps.webdriver.version>
 	</properties>
 
 	<dependencies>
 
-		<dependency>
-			<groupId>javax.activation</groupId>
-			<artifactId>activation</artifactId>
-			<version>1.1.1</version>
-		</dependency>
+       <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
+            <version>1.1.1</version>
+        </dependency>
 
 		<!-- Adding a dependency on the substeps bom will bring in the substeps 
 			core and everything else needed to build and run -->
@@ -47,7 +49,7 @@
 		<dependency>
 			<groupId>com.technophobia.substeps</groupId>
 			<artifactId>substeps-bom</artifactId>
-			<version>1.0.2-SNAPSHOT</version>
+			<version>${substeps.bom.version}</version>
 			<type>pom</type>
 			<scope>test</scope>
 		</dependency>
@@ -58,15 +60,15 @@
 		<dependency>
 			<groupId>com.technophobia.substeps</groupId>
 			<artifactId>webdriver-substeps</artifactId>
-			<version>1.0.2-SNAPSHOT</version>
+			<version>${substeps.webdriver.version}</version>
 			<scope>test</scope>
 		</dependency>
-
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.6.4</version>
-		</dependency>
+        
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.6.4</version>
+        </dependency>
 
 	</dependencies>
 
@@ -134,7 +136,7 @@
 								<!-- The directory in which the test execution report will be written 
 									to -->
 								<outputDirectory>${project.build.directory}</outputDirectory>
-								<!-- report title is used in the HTML test report -->
+                                <!-- report title is used in the HTML test report -->
 								<reportTitle>Webdriver Substeps Example Report -
 									${project.version}</reportTitle>
 							</executionReportBuilder>
