@@ -10,7 +10,7 @@
 		and project -->
 	<groupId>com.technophobia.substeps</groupId>
 	<artifactId>webdriver-substeps-example</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.1.0-SNAPSHOT</version>
 
 	<packaging>jar</packaging>
 	<name>Webdriver Substeps Example</name>
@@ -24,17 +24,15 @@
 		</license>
 	</licenses>
 
-
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<selenium.version>2.25.0</selenium.version>
 		<hamcrest.version>1.3.RC2</hamcrest.version>
 		<junit.version>4.10</junit.version>
-
-		<substeps.runner.version>1.0.1</substeps.runner.version>
-		<webdriver.substeps.version>1.0.1</webdriver.substeps.version>
-
+		<forked>true</forked>
+                <substeps.bom.version>1.1.0-SNAPSHOT</substeps.bom.version>
+                <substeps.webdriver.version>1.1.0-SNAPSHOT</substeps.webdriver.version>
 	</properties>
 
 	<dependencies>
@@ -45,24 +43,25 @@
             <version>1.1.1</version>
         </dependency>
 
+		<!-- Adding a dependency on the substeps bom will bring in the substeps 
+			core and everything else needed to build and run -->
 
-		<!-- webdriver-substeps will also include substeps-core as a dependency -->
+		<dependency>
+			<groupId>com.technophobia.substeps</groupId>
+			<artifactId>substeps-bom</artifactId>
+			<version>${substeps.bom.version}</version>
+			<type>pom</type>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- You'll also need dependencies on any step implementations you're going 
+			to use -->
+
 		<dependency>
 			<groupId>com.technophobia.substeps</groupId>
 			<artifactId>webdriver-substeps</artifactId>
-			<version>${webdriver.substeps.version}</version>
-               <exclusions>
-                <exclusion>
-                      <groupId>javax.activation</groupId>
-                      <artifactId>activation</artifactId>
-                </exclusion>
-            </exclusions>
-		</dependency>
-
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-java</artifactId>
-			<version>${selenium.version}</version>
+			<version>${substeps.webdriver.version}</version>
+			<scope>test</scope>
 		</dependency>
         
         <dependency>
@@ -76,8 +75,8 @@
 	<profiles>
 
 		<!-- In this example, the running of the acceptance tests is defined within 
-			a profile, during the integration-test phase of the maven build.
-			See the substeps-runner documentation for more details. -->
+			a profile, during the integration-test phase of the maven build. See the 
+			substeps-runner documentation for more details. -->
 
 		<profile>
 			<id>acceptance-tests</id>
@@ -88,8 +87,7 @@
 				<plugins>
 					<plugin>
 						<groupId>com.technophobia.substeps</groupId>
-						<artifactId>substeps-runner</artifactId>
-						<version>${substeps.runner.version}</version>
+						<artifactId>substeps-maven-plugin</artifactId>
 
 						<executions>
 							<execution>
@@ -103,9 +101,12 @@
 
 						<configuration>
 
+							<runTestsInForkedVM>${forked}</runTestsInForkedVM>
+
 							<executionConfigs>
 
-								<!-- One or more 'execution configurations', use multiple configs for different test initialisation, phases of project, etc -->
+								<!-- One or more 'execution configurations', use multiple configs 
+									for different test initialisation, phases of project, etc -->
 
 								<executionConfig>
 									<description>Self Test Features</description> <!-- This appears at the root of the results report -->
@@ -132,34 +133,69 @@
 							<!-- Default HTML report builder -->
 							<executionReportBuilder
 								implementation="com.technophobia.substeps.report.DefaultExecutionReportBuilder">
-
 								<!-- The directory in which the test execution report will be written 
 									to -->
-								<outputDirectory>${project.build.testOutputDirectory}</outputDirectory>
-                                
+								<outputDirectory>${project.build.directory}</outputDirectory>
                                 <!-- report title is used in the HTML test report -->
-                                <reportTitle>Webdriver Substeps Example Report - ${project.version}</reportTitle>
+								<reportTitle>Webdriver Substeps Example Report -
+									${project.version}</reportTitle>
 							</executionReportBuilder>
 
 						</configuration>
-						<dependencies>
-
-							<!-- NB. The plugin uses all test dependencies defined in this project, 
-								as it's own so there is no need to list separately. The exception is an slf4j 
-								logging implementation, which is required before other dependencies have 
-								been added. This logger is included as an example, it can be replaced with 
-								another slf4j logger of your choice. -->
-
-							<dependency>
-								<groupId>org.slf4j</groupId>
-								<artifactId>slf4j-log4j12</artifactId>
-								<version>1.6.4</version>
-							</dependency>
-
-						</dependencies>
 					</plugin>
 				</plugins>
 			</build>
+		</profile>
+
+		<profile>
+			<!-- This is not needed to use substeps, this profile copies dependencies 
+				for the example ant build -->
+
+			<id>prepareDependenciesForAnt</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-dependency-plugin</artifactId>
+
+						<executions>
+							<execution>
+								<id>copyThirdParty</id>
+								<phase>package</phase>
+								<goals>
+									<goal>copy-dependencies</goal>
+								</goals>
+
+								<configuration>
+									<outputDirectory>${project.build.directory}/ant-dependencies-third-party</outputDirectory>
+									<excludeGroupIds>com.technophobia.substeps</excludeGroupIds>
+								</configuration>
+
+							</execution>
+							<execution>
+								<id>copySubsteps</id>
+								<phase>package</phase>
+								<goals>
+									<goal>copy-dependencies</goal>
+								</goals>
+
+								<configuration>
+									<outputDirectory>${project.build.directory}/ant-dependencies-substeps</outputDirectory>
+									<includeArtifactIds>substeps-ant-runner,substeps-junit-runner,substeps-runner-common,webdriver-substeps,substeps-core,substeps-core-api</includeArtifactIds>
+								</configuration>
+
+							</execution>
+						</executions>
+
+					</plugin>
+
+				</plugins>
+			</build>
+
 		</profile>
 
 	</profiles>

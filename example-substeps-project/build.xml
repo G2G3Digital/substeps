@@ -1,0 +1,56 @@
+<project name="MyProject" default="run-substeps" basedir="." xmlns:substeps="antlib:com.technophobia.substeps">
+	<description>
+        Simple example build file to demonstrate using SubSteps with ANT
+        </description>
+
+	<property name="src" location="src/test/java" />
+	<property name="build" location="target/ant-build" />
+
+	<path id="cp">
+		<fileset dir="target/ant-dependencies-substeps">
+                  <include name="*.jar" />
+                </fileset>
+             
+		<fileset dir="target/ant-dependencies-third-party">
+                  <include name="*.jar" />
+                </fileset>
+
+                <pathelement location="${build}" />
+
+                <pathelement location="src/test/resources" />
+	</path>
+
+	<target name="clean">
+		<delete dir="${build}"/>
+	</target>
+
+	<target name="compile" depends="init">
+		<javac srcdir="${src}" destdir="${build}" classpathref="cp" />
+	</target>
+
+	<target name="init">
+		<mkdir dir="${build}"/>
+	</target>
+
+	<target name="run-substeps" depends="compile">
+            <taskdef uri="antlib:com.technophobia.substeps"
+                resource="substeps.xml"
+                classpathref="cp" />
+
+                <substeps:substeps outputDir="${basedir}/target/ant-output">
+                        <substeps:executionConfig featureFile="${basedir}/src/test/resources/features" subStepsFileName="${basedir}/src/test/resources/substeps" > 
+
+                                <substeps:stepImplementationClassNames>
+
+                                        <substeps:param>com.technophobia.webdriver.substeps.impl.BaseWebdriverSubStepImplementations</substeps:param>
+                                        <substeps:param>com.technophobia.webdriver.substeps.example.ExampleCustomWebdriverStepImplementations</substeps:param>
+                          
+                         
+                                </substeps:stepImplementationClassNames> 
+
+                        </substeps:executionConfig>
+                </substeps:substeps>
+	</target>
+
+
+</project>
