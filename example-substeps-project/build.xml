@@ -38,7 +38,9 @@
                 classpathref="cp" />
 
                 <substeps:substeps outputDir="${basedir}/target/ant-output">
-                        <substeps:executionConfig featureFile="${basedir}/src/test/resources/features" subStepsFileName="${basedir}/src/test/resources/substeps" > 
+                        <substeps:executionConfig featureFile="${basedir}/src/test/resources/features" 
+                        	subStepsFileName="${basedir}/src/test/resources/substeps"
+                        	tags="@non-visual"> 
 
                                 <substeps:stepImplementationClassNames>
 

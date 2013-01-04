@@ -40,6 +40,12 @@
 		<!-- Adding a dependency on the substeps bom will bring in the substeps 
 			core and everything else needed to build and run -->
 
+       <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+
 		<dependency>
 			<groupId>com.technophobia.substeps</groupId>
 			<artifactId>substeps-bom</artifactId>

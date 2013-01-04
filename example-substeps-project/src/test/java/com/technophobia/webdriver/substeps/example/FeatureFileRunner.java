@@ -36,7 +36,7 @@ import com.technophobia.webdriver.substeps.impl.BaseWebdriverSubStepImplementati
  */
 @SubStepsConfiguration(featureFile = "./target/test-classes/features", subStepsFile = "./target/test-classes/substeps", stepImplementations = {
         BaseWebdriverSubStepImplementations.class,
-        ExampleCustomWebdriverStepImplementations.class }, tagList = "@all")
+        ExampleCustomWebdriverStepImplementations.class }, tagList = "@non-visual")
 @RunWith(JunitFeatureRunner.class)
 public class FeatureFileRunner {
     // no op
