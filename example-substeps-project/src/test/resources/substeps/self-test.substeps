@@ -1,5 +1,3 @@
-# Substeps file for the webdriver-substeps self test.
-
 Define: Given I go to the self test page
 	NavigateTo /self-test.html
 
@@ -40,6 +38,7 @@ Define: Given I enter "<txt>" into the text field
 Define: Then the text field will contain "<txt>"	
     FindByName "named_text_field"
     AssertCurrentElement attribute="value" value="<txt>"
+#    AssertCurrentElement text="<txt>"
 
 Define: Given I enter "<txt>" another way into the text field
 	ClearAndSendKeys <txt> to id text-id
@@ -72,6 +71,8 @@ Define: Then I can check checkbox with text "<cb_text>"
 Define: And checkbox with text "<cb_text>" is checked
 	FindCheckbox inside tag="label" with label="<cb_text>"
 	AssertCheckBox checked=true
+
+    
    
 Define: And the field located beneath the heading has the text '<txt>'
 	FindById parent_div_id
@@ -85,5 +86,71 @@ Define: And I can click the link "<link_text>" and see "<txt>"
 	
 Define: And the table row <row>, column <col> contains "<txt>"
 	FindById table_id
-	AssertTableValue column <col>, row <row> contains text "<txt>"
+	AssertTableValue column <col>, row <row> contains text "<txt>"	
 	
+Define: Given I go to an external page such as Google
+    NavigateTo http://www.google.co.uk
+
+Define: Then the page title is "<page_title>"
+	AssertPageTitle is "<page_title>"
+	
+Define: And find by child works
+        FindByTagAndAttributes tag="div" attributes=[class="mini-profile"]
+        FindChild ByTagAndAttributes tag="a" attributes=[class="btn edit-button dialog-modal"]  
+        Click
+        AssertValue id mcshane-bug-div-id text = "mcshane"
+        AssertValue id mcshane-negative-bug-div-id text = "mcshane negative test"	
+
+
+Define: Given the context menu hasn't been clicked
+        FindById context-clicked-div 
+        AssertCurrentElement has attributes=[class="context-not-clicked"]
+        AssertCurrentElement text contains "Not clicked"
+        
+Define: And I click the context menu
+        FindById context-click-a
+        PerformContextClick
+        
+    
+Define: Then I see "context has been clicked"
+         FindById context-clicked-div
+         AssertCurrentElement has attributes=[class="context-clicked"]
+        AssertEventuallyContains context-clicked-div "context has been clicked"
+        
+        
+Define: Given that I've not double clicked the link
+         AssertValue id dbl-clicked-div text = "Not doubled clicked yet"
+        
+    
+Define: And I double click the link
+        FindById dbl-click-a
+        PerformDoubleClick
+        
+Define: Then I can see I've double clicked
+        AssertValue id dbl-clicked-div text = "element has been double clicked"
+        
+Define: And I can find the disabled text field
+        FindById postcode
+        AssertCurrentElement attribute="disabled" value="true"
+        
+Define: And I select the second option by looking at the text it contains
+        FindTagElementContainingText tag="option" text="two"
+        Click
+        
+Define: Then I find a row using column contents
+    FindById table-contents-tests
+    FindTableRowWithColumnsThatContainText ["My Name", "Where it all began...", "09:31"]
+    
+Define: And I can find and click the link "<linkText>" in the row    
+    FindElementInRow linkText="<linkText>"
+    Click
+    FindById show-text-on-link-click-in-row1
+    FindById show-text-on-link-click-in-row2 
+    # this won't have been hidden
+
+Define: Given I click the Dont click me button
+   ClickById pop-alert-button
+   
+Define: Then I see an Alert "<msg>"
+    DismissAlert with message "<msg>"
+            

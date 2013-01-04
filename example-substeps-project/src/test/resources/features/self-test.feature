@@ -1,10 +1,9 @@
-# This is an example feature that runs against a static website
-# Operations on form elements trigger javascript, which in turn activates elements upon which assertions are made 
-# This feature is taken from the webdriver-substeps self-test.
-
-Tags: @all
+Tags: @non-visual
 
 Feature: A feature to self test the webdriver substeps implementations
+
+# how do we test that these things fail, when we expect them to - this will test that they pass when
+# expected, but not fail when expected
 
 Scenario: a scenario
 	Given I go to the self test page
@@ -35,4 +34,24 @@ Scenario: a scenario
 	
 	# table
 	And the table row 1, column 2 contains "Mrs Evil Headtecher"   	
+	And find by child works
+	
+	And I can find the disabled text field
 
+    And I dont see "number two option" in select id select_id
+    And I select the second option by looking at the text it contains
+	And I see "number two option" in select id select_id
+	
+	Then I find a row using column contents 
+    And I can find and click the link "View" in the row
+    
+    # £ checking
+    Given I enter "£1000000" into the text field
+    Then the text field will contain "£1000000"
+	
+##################################################################	
+	# these tests need to be last as they go off to google
+	Given I go to an external page such as Google
+	Then the page title is "Google"
+    
+    # Do not add more steps here

@@ -12,13 +12,15 @@ So if your projects pom is currently set up to use a 1.0.x version follow the st
 
   This will bring in the correct versions of various substep dependencies you need
 
-  <dependency>
-    <groupId>com.technophobia.substeps</groupId>
-    <artifactId>substeps-bom</artifactId>
-    <version>1.1.0</version>
-    <type>pom</type>
-    <scope>test</scope>
-  </dependency>
+  .. code-block:: xml
+  
+     <dependency>
+       <groupId>com.technophobia.substeps</groupId>
+       <artifactId>substeps-bom</artifactId>
+       <version>1.1.0</version>
+       <type>pom</type>
+       <scope>test</scope>
+     </dependency>
 
 2. If you have dependency directly on substeps-core you can remove this.  
 

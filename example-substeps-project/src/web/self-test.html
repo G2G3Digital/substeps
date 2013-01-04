@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 <html>
 <head >
 	<title>Hello Self Test page</title>
@@ -30,6 +30,7 @@ function showId(elemId)
 	var elem = document.getElementById(elemId);
 	elem.style.visibility="visible";
 	return false;
+	
 }
 
 function hideId(elemId)
@@ -46,6 +47,27 @@ function showDivDelayed()
 	return false;
 }
 
+// not completely sure if this is the best way to test this - it appears to work
+// there's a more thorough example of a context menu here http://luke.breuer.com/tutorial/javascript-context-menu-tutorial.htm 
+
+function performContextClick()
+{
+	var elem = document.getElementById("context-clicked-div");
+	elem.innerHTML ="context has been clicked";
+	elem.className ="context-clicked"
+	event.stopPropagation();
+	return false;
+}
+
+function performDoubleClick()
+{
+    var elem = document.getElementById("dbl-clicked-div");
+    elem.innerHTML ="element has been double clicked";
+    return false;
+
+    
+}
+
 </script>	
 	
 </head>
@@ -53,14 +75,19 @@ function showDivDelayed()
 
 <form>
 
+    <div id="dbl-clicked-div">Not doubled clicked yet</div>
+    
+    <div ><a href="#" id="dbl-click-a" ondblclick="performDoubleClick();">double click</a></div>
+    
+
 <p>
 	<input type="submit" value="click me" onclick="do_btn_click(); return false"/>
 </p>
-<p>
-	<div id="show-text-on-button-click-text-div-id" style="visibility:hidden">Wahoo</div>
-</p>
 
-<p>
+	<div id="show-text-on-button-click-text-div-id" style="visibility:hidden">Wahoo</div>
+
+
+
 <select id="select_id">
     <option value="1">number one option</option>
     <option value="2" selected="selected">number two option</option>
@@ -68,14 +95,14 @@ function showDivDelayed()
 
 </select>
 
-</p>
+
 <p>
 
 
 <input type="submit" id="click-id" value="click me by id" onclick="do_btn_click2(); return false"/>
 
 </p>
-<p>
+
 
 
 <div id="show-text-on-id-click-text-div-id" style="visibility:hidden">Wahoo Two</div>
@@ -85,33 +112,29 @@ function showDivDelayed()
 <div id="mcshane-negative-bug-div-id" >mcshane negative test</div>
 
 
-</p>
-<p>
 
-<input type="submit" id="click-id3" value="delayed click" onclick="do_btn_click3(); return false"/>
-
-</p>
 <p>
+    <input type="submit" id="click-id3" value="delayed click" onclick="do_btn_click3(); return false"/>
+</p>
+
 
 <div id="show-text-on-deplayed-id-click-text-div-id" style="visibility:hidden">Delayed text</div>
-</p>
+
 <p>
-
-<input type="text" name="named_text_field" maxlength="10" size="10"></input>
-
+    <input type="text" name="named_text_field" maxlength="10" size="10"></input>
 </p>
+
 <p>
-
-<input type="text" id="text-id"></input>
-
+    <input type="text" id="text-id"></input>
 </p>
 
-<br></br>
+<br/>
 
 <div id="parent_div_id">
 	<span class="some_class">some child text</span>
-
 </div>
+<!--  same span class as above, but not a child -->
+<span class="some_class">some other text</span>
 
 <a href="#" onclick='showId("show-text-on-link-click-text-div-id");'>a text link</a>
 
@@ -149,49 +172,140 @@ function showDivDelayed()
 
 </form>
 
-<div class="clear">
-<table id="table_id">
-<thead>
-<tr>
-<th>Organisation</th>
-<th>Employer</th>
-<th>Certificate</th>
-<th>Date of last check</th>
-<th>Total checks</th>
-</tr>
-<thead>
-<tbody>
-<tr>
-<td>Acme corporation</td>
-<td>Mrs Evil Headtecher</td>
-<td>X00000000024</td>
-<td>19/01/11</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Acme corporation</td>
-<td>Mr A. Person</td>
-<td>X00000000025</td>
-<td>20/01/11</td>
-<td>2</td>
-</tr>
-<tr>
-<td>Acme corporation</td>
-<td>Mr A. Person</td>
-<td>X00000000026</td>
-<td>21/01/11</td>
-<td>3</td>
-</tr> 
-</tbody>
-</thead>
-</thead>
-</table>
-</div>
+    <div class="clear">
+		<table id="table_id">
+			<thead>
+				<tr>
+					<th>Organisation</th>
+					<th>Employer</th>
+					<th>Certificate</th>
+					<th>Date of last check</th>
+					<th>Total checks</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Acme corporation</td>
+					<td>Mrs Evil Headtecher</td>
+					<td>X00000000024</td>
+					<td>19/01/11</td>
+					<td>1</td>
+				</tr>
+				<tr>
+					<td>Acme corporation</td>
+					<td>Mr A. Person</td>
+					<td>X00000000025</td>
+					<td>20/01/11</td>
+					<td>2</td>
+				</tr>
+				<tr>
+					<td>Acme corporation</td>
+					<td>Mr A. Person</td>
+					<td>X00000000026</td>
+					<td>21/01/11</td>
+					<td>3</td>
+				</tr>
+			</tbody>
+
+		</table>
+	</div>
 
 
 
 <div>
+		<div class="container">
+			<div class="row">
+				<div class="span12"></div>
+				<div class="span8">
+					<div class="mini-profile">
+						<div>
+							<div class="btn-group">
+								<a class="btn edit-button dialog-modal" data-toggle="modal"
+									href="#" onclick='showId("mcshane-bug-div-id");'>Edit</a>
+							</div>
+						</div>
+						<a href="#"> <img src="#" class="thumbnail avatar" alt="Edit My Group 1"/></a>
+						<h2>
+							Edit My Group 1 <i class="badge badge-amber area-tag">Group</i>
+						</h2>
+						<p class="profile-secondary">
+							<strong>Talking about:</strong>
+							<span>
+								<span>adding another one, </span> 
+								<span>and another, </span> 
+								<span>default,</span> 
+								<span>generic things, </span>
+								 <span>new topic </span>
+							</span>
+						</p>
+						<p class="profile-tertiary">Type : 1</p>
+					</div>
+				</div>
+				<!-- another a with the same class, but that's not a child -->
+				<div class="btn-group">
+					<a class="btn edit-button dialog-modal" data-toggle="modal"
+						href="#" onclick='hideId("mcshane-negative-bug-div-id");'>Edit</a>
+				</div>
 
+				<div class="span4 hidden-overflow" id="global-cta"></div>
+			</div>
+		</div>
+
+	</div>
+    
+    <div class="context-not-clicked" id="context-clicked-div">Context Not clicked yet</div>
+    
+    <div oncontextmenu="performContextClick();"><a href="#" id="context-click-a" >context click</a></div>
+
+
+<input id="postcode" type="text" value="a postcode" name="postcode" disabled="disabled"/>
+
+
+
+<div id="show-text-on-link-click-in-row1" style="visibility:hidden">correct row clicked</div>
+<div id="show-text-on-link-click-in-row2">incorrect row clicked</div>
+
+
+<table class="comments" border="1" id="table-contents-tests">
+  <caption>There are 2 comments awaiting moderation</caption>
+    <thead>
+      <tr>
+    <th>Name</th>
+    <th>Blog title</th>
+    <th>Date </th>
+    <th>Time</th>
+    <th>Comment</th>
+    <th></th>
+    <th></th>
+    <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+          <td><a href="mailto:me@here.com" title="email user">My Name</a></td>
+          <td>Where it all began...</td>
+          <td>December 19 2012</td>
+          <td>09:31</td>
+          <td title="I would like to comment on your blog post. Here it is. ">I would like to comment on your blog post. Here it is. </td>
+          <td><a href="#" onclick='showId("show-text-on-link-click-in-row1");'>View</a></td>
+          <td><a href="#">Approve</a></td>
+          <td><a href="#">Reject</a></td>
+      </tr>
+      <tr>
+          <td><a href="#" title="email user">Someone Else</a></td>
+          <td>Where it all began...</td>
+          <td>December 19 2012</td>
+          <td>09:03</td>
+          <td title="I would also like to make a comment on your blog post. ">I would also like to make a comment on your blog post. </td>
+          <td><a href="#" onclick='hideId("show-text-on-link-click-in-row2");'>View</a></td>
+          <td><a href="#">Approve</a></td>
+          <td><a href="#">Reject</a></td>
+      </tr> 
+   
+    </tbody>
+  </table>
+
+<button type="button" id="pop-alert-button" onclick="alert('I told you not to click me!')">Don't click me!</button><br/>
 
 </body>
 </html>
