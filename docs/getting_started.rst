@@ -226,7 +226,7 @@ These instructions are for building a maven based project.
 			<selenium.version>2.25.0</selenium.version>
 			<hamcrest.version>1.3.RC2</hamcrest.version>
 			<junit.version>4.10</junit.version>
-			<forked>true</forked>
+			
 			<substeps.bom.version>1.1.0-SNAPSHOT</substeps.bom.version>
 			<substeps.webdriver.version>1.1.0-SNAPSHOT</substeps.webdriver.version>
 		</properties>
@@ -291,7 +291,11 @@ These instructions are for building a maven based project.
 
 							<configuration>
 
-								<runTestsInForkedVM>${forked}</runTestsInForkedVM>
+                                                                <!-- Since 1.1.0 substeps executes tests in a forked jvm by default, set this parameter to false to instead execute within the jvm running maven  -->
+								<runTestsInForkedVM>true</runTestsInForkedVM>
+
+                                                                <!-- If executing in a forked jvm, the substeps runner will start that jvm with any arguments specified in the vmArgs parameter -->
+                                                                <vmArgs>-Xmx1024m</vmArgs>
 
 								<executionConfigs>
 
