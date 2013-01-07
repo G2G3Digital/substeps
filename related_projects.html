@@ -52,14 +52,50 @@
         
   <div class="section" id="related-projects">
 <h1>Related Projects<a class="headerlink" href="#related-projects" title="Permalink to this headline">¶</a></h1>
-<p>There are a number of supplementary projects providing Substep functionality (bracketed strings refer to the corresponding maven artifact ids where applicable):</p>
-<ul class="simple">
-<li><a class="reference external" href="http://technophobia.github.com/substeps-runner/">Maven runner</a> (susbteps-runner)</li>
-<li><a class="reference external" href="http://technophobia.github.com/substeps-webdriver/">Webdriver Substeps</a> (webdriver-substeps)</li>
-<li><a class="reference external" href="https://github.com/technophobia/substeps-glossary">Glossary Builder</a> (substeps-glossary)</li>
-<li>Eclipse plugin *</li>
-<li>Sonar plugin *</li>
-<li>Reporting *</li>
+<p>There are a number of projects providing Substep functionality (bracketed strings refer to the corresponding maven artifact ids where applicable):</p>
+<ul>
+<li><dl class="first docutils">
+<dt><a class="reference external" href="https://github.com/technophobia/substeps-bom/">BOM</a> (substeps-bom)</dt>
+<dd><p class="first last">this maven &#8216;Bill of Materials&#8217; project draws together the various inter project dependencies for convenience.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference external" href="https://github.com/technophobia/substeps-api">Core Api</a> (substeps-core-api)</dt>
+<dd><p class="first last">An api project introduced in 1.1.0 to reduce dependencies and coupling.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference external" href="https://github.com/technophobia/substeps-core">Core</a> (substeps-core)</dt>
+<dd><p class="first last">The main substeps runtime, parsers and report builder.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference external" href="http://technophobia.github.com/substeps-runner/">Runner</a> (susbteps-runner)</dt>
+<dd><p class="first last">From 1.1.0 onwards, this project now includes Maven, Junit and Ant runner sub projects.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference external" href="http://technophobia.github.com/substeps-webdriver/">Webdriver Substeps</a> (webdriver-substeps)</dt>
+<dd><p class="first last">A library of Step implementations for testing web applications using webdriver.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference external" href="https://github.com/technophobia/substeps-glossary">Glossary Builder</a> (substeps-glossary)</dt>
+<dd><p class="first last">A maven plugin to generate meta data around step implementations.  This meta data can then be used in reports and in the eclipse plugin.</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">Eclipse plugin *</p>
+</li>
+<li><p class="first">Sonar plugin *</p>
+</li>
+<li><p class="first">Reporting *</p>
+</li>
 </ul>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>

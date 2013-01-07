@@ -1,0 +1,111 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Migrating your maven build to version 1.1.0 &mdash; Substeps  documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="top" title="Substeps  documentation" href="index.html" />
+    <link rel="prev" title="Issues &amp; Getting Involved" href="involved.html" /> 
+  </head>
+  <body>
+      <div class="header"><h1 class="heading"><a href="index.html">
+          <span>Substeps  documentation</span></a></h1>
+        <h2 class="heading"><span>Migrating your maven build to version 1.1.0</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="involved.html">Issues &amp; Getting Involved</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="migrating-your-maven-build-to-version-1-1-0">
+<h1>Migrating your maven build to version 1.1.0<a class="headerlink" href="#migrating-your-maven-build-to-version-1-1-0" title="Permalink to this headline">¶</a></h1>
+<p>In version 1.1.0, Substeps was restructured which means there are a couple of changes you will need to make.</p>
+<ul class="simple">
+<li>Substeps was split into smaller sub projects therefore in order to keep project configuration simple a bill of materials (BOM) was introduced</li>
+<li>In order to comply with maven standards the artifactId of the maven plugin has been changed</li>
+</ul>
+<p>So if your projects pom is currently set up to use a 1.0.x version follow the steps below to migrate to 1.1.0.</p>
+<ol class="arabic simple">
+<li>Add a dependency on the BOM</li>
+</ol>
+<blockquote>
+<div><p>This will bring in the correct versions of various substep dependencies you need</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;dependency&gt;</span>
+  <span class="nt">&lt;groupId&gt;</span>com.technophobia.substeps<span class="nt">&lt;/groupId&gt;</span>
+  <span class="nt">&lt;artifactId&gt;</span>substeps-bom<span class="nt">&lt;/artifactId&gt;</span>
+  <span class="nt">&lt;version&gt;</span>1.1.0<span class="nt">&lt;/version&gt;</span>
+  <span class="nt">&lt;type&gt;</span>pom<span class="nt">&lt;/type&gt;</span>
+  <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li>If you have dependency directly on substeps-core you can remove this.</li>
+<li>Webdriver changes</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>If you are using the webdriver project you may have an explicit dependency on selenium, this can be removed.</li>
+<li>Update the version of webdriver-substeps to 1.1.0</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li>Update the plugin configuration</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>Previously the maven plugin was named &#8216;substeps-runner&#8217; change this to &#8216;substeps-maven-plugin&#8217;</li>
+<li>Also remove the version number from the pom (the dependency you added on the bom above will bring in the correct version of this plugin)</li>
+</ul>
+</div></blockquote>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="involved.html">Issues &amp; Getting Involved</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Technophobia.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
