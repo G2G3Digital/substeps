@@ -1,7 +1,7 @@
 Migrating your maven build to version 1.1.0
 ===========================================
 
-In 1.1.0 Substeps was restructured which means there are a couple of changes you will need to make to your projects build.
+In version 1.1.0, Substeps was restructured which means there are a couple of changes you will need to make.
 
 * Substeps was split into smaller sub projects therefore in order to keep project configuration simple a bill of materials (BOM) was introduced
 * In order to comply with maven standards the artifactId of the maven plugin has been changed
