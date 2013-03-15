@@ -5,6 +5,11 @@ In version 1.1.0, Substeps was restructured which means there are a couple of ch
 
 * Substeps was split into smaller sub projects therefore in order to keep project configuration simple a bill of materials (BOM) was introduced
 * In order to comply with maven standards the artifactId of the maven plugin has been changed
+* Substeps tests can now be launched in a separate VM, this may be apparent in the level of logging output during test execution, which will now use 
+  logging.properties defined in YOUR project rather than the ones included in one of the substeps libraries (we've now removed these).
+  
+.. Note::
+   `*` In 1.1.0, to run tests in the forked VM, your logging properties must set com.technophobia.substeps.jmx.SubstepsJMXServer to debug level.  This will not be necessary in future releases.
 
 So if your projects pom is currently set up to use a 1.0.x version follow the steps below to migrate to 1.1.0.
 
